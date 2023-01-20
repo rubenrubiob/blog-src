@@ -1,0 +1,4 @@
+memory_limit = ${PHP_MEMORY_LIMIT}
+upload_max_filesize = 10M
+expose_php = Off
+realpath_cache_ttl=${PHP_REALPATH_CACHE_TTL}

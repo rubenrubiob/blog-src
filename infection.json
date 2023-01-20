@@ -1,0 +1,26 @@
+{
+    "$schema": "https://raw.githubusercontent.com/infection/infection/master/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "Kernel.php",
+            "{.*/Infrastructure/.*}",
+            "{.*/Domain/Exception/.*}"
+        ]
+    },
+    "logs": {
+        "html": "var/log/infection/infection.html",
+        "text": "var/log/infection/infection.log",
+        "summary": "var/log/infection/infection-summary.log",
+        "debug": "var/log/infection/infection-debug.log",
+        "perMutator": "var/log/infection/infection-permutator.log"
+    },
+    "mutators": {
+        "@default": true
+    },
+    "phpUnit": {
+        "customPath": "vendor\/bin\/phpunit"
+    }
+}

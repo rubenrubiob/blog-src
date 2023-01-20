@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    container_name: blog-src-php
+    working_dir: /var/www/blog-src
+    volumes:
+      - ./:/var/www/blog-src:cached
+      - ./.docker/php/php.ini-development:/usr/local/etc/php/php.ini:cached
+    environment:
+      XDEBUG_SESSION: PHPSTORM
+      PHP_IDE_CONFIG: serverName=docker-localhost
