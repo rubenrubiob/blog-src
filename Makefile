@@ -8,6 +8,9 @@ unit-test: ## Execute phpunit unit test
 	@echo "============================"
 	@docker exec blog-src-php sh -c "XDEBUG_MODE=off php ./vendor/bin/phpunit -c phpunit.xml.dist --testsuite Unit"
 
+check-code-style: ## verify coding standards are respected
+	docker-compose run --rm sandbox vendor/bin/phpcs
+
 phpstan: ## Execute PHPStan
 	@docker exec blog-src-php sh -c "XDEBUG_MODE=off vendor/bin/phpstan analyse"
 
