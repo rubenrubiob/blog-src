@@ -14,7 +14,6 @@ use rubenrubiob\Domain\ValueObject\PercentatgeImpostos;
 final class LlistaImportsTest extends TestCase
 {
     private const MONEDA_LOWER = 'eur';
-    private const MONEDA_UPPER = 'EUR';
 
     private const UNA_ALTRA_MONEDA = 'gbp';
 
