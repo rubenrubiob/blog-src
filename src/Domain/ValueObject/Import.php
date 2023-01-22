@@ -56,6 +56,14 @@ final readonly class Import
         return $this->preuNet;
     }
 
+    public function preuNetAsMoney(): Money
+    {
+        return Money::ofMinor(
+            $this->preuNet,
+            $this->moneda,
+        );
+    }
+
     public function percentatgeImpostos(): PercentatgeImpostos
     {
         return $this->percentatgeImpostos;
@@ -66,9 +74,25 @@ final readonly class Import
         return $this->quantitatImpostos;
     }
 
+    public function quantitatImpostosAsMoney(): Money
+    {
+        return Money::ofMinor(
+            $this->quantitatImpostos,
+            $this->moneda,
+        );
+    }
+
     public function preuFinalMinor(): int
     {
         return $this->preuFinal;
+    }
+
+    public function preuFinalAsMoney(): Money
+    {
+        return Money::ofMinor(
+            $this->preuFinal,
+            $this->moneda,
+        );
     }
 
     public function moneda(): string
