@@ -44,19 +44,9 @@ final class LlistaImports
     {
         $this->validarMonedesCoincideixen($import);
 
+        $this->recalcularImportsTotals($import);
+
         $this->imports[] = $import;
-
-        $this->totalPreusNets = $this->totalPreusNets->plus(
-            $import->preuNetAsMoney(),
-        );
-
-        $this->totalImpostos = $this->totalImpostos->plus(
-            $import->quantitatImpostosAsMoney(),
-        );
-
-        $this->total = $this->total->plus(
-            $import->preuFinalAsMoney(),
-        );
     }
 
     public function totalPreusNetsMinor(): int
@@ -99,5 +89,20 @@ final class LlistaImports
                 $import->moneda(),
             );
         }
+    }
+
+    private function recalcularImportsTotals(Import $import): void
+    {
+        $this->totalPreusNets = $this->totalPreusNets->plus(
+            $import->preuNetAsMoney(),
+        );
+
+        $this->totalImpostos = $this->totalImpostos->plus(
+            $import->quantitatImpostosAsMoney(),
+        );
+
+        $this->total = $this->total->plus(
+            $import->preuFinalAsMoney(),
+        );
     }
 }
