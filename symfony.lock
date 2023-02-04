@@ -1,4 +1,16 @@
 {
+    "league/tactician-bundle": {
+        "version": "1.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "222c3d39d38378bc6a9790a0b5baf841ba6679b9"
+        },
+        "files": [
+            "config/packages/league_tactician.yaml"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {
