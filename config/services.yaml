@@ -18,5 +18,15 @@ services:
         exclude:
             - '../src/Infrastructure/Symfony/Kernel.php'
 
+    # CommandBus and QueryBus
+    rubenrubiob\Infrastructure\CommandBus\TacticianCommandBus:
+        arguments:
+            $commandBus: '@tactician.commandbus.write'
+    rubenrubiob\Infrastructure\QueryBus\TacticianQueryBus:
+        arguments:
+            $queryBus: '@tactician.commandbus.read'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    rubenrubiob\Infrastructure\CommandBus\CommandBus: '@rubenrubiob\Infrastructure\CommandBus\TacticianCommandBus'
+    rubenrubiob\Infrastructure\QueryBus\QueryBus: '@rubenrubiob\Infrastructure\QueryBus\TacticianQueryBus'
