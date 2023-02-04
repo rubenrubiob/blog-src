@@ -7,7 +7,7 @@
         "excludes": [
             "Kernel.php",
             "{.*/Infrastructure/.*}",
-            "{.*/Domain/Exception/.*}"
+            "{Domain/Exception/.*}"
         ]
     },
     "logs": {
