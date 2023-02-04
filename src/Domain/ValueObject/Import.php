@@ -6,7 +6,6 @@ namespace rubenrubiob\Domain\ValueObject;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\Exception\NumberFormatException;
-use Brick\Math\Exception\RoundingNecessaryException;
 use Brick\Math\RoundingMode;
 use Brick\Money\Exception\UnknownCurrencyException;
 use Brick\Money\Money;
