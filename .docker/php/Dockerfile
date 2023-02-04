@@ -1,4 +1,4 @@
-FROM php:8.2.1-fpm
+FROM php:8.2.2-fpm
 
 RUN rm /etc/apt/preferences.d/no-debian-php && \
     apt-get update && \
