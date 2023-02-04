@@ -18,6 +18,12 @@ services:
         exclude:
             - '../src/Infrastructure/Symfony/Kernel.php'
 
+    # Controllers
+    rubenrubiob\Infrastructure\Ui\Http\Controller\:
+        resource: '../src/Infrastructure/Ui/Http/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+
     # CommandBus and QueryBus
     rubenrubiob\Infrastructure\CommandBus\TacticianCommandBus:
         arguments:
