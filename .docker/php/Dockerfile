@@ -1,4 +1,4 @@
-FROM php:8.2.2-fpm
+FROM php:8.2.4-fpm
 
 RUN rm /etc/apt/preferences.d/no-debian-php && \
     apt-get update && \
@@ -20,8 +20,7 @@ COPY .docker/php/opcache.ini "$PHP_INI_DIR/conf.d/opcache.ini"
 WORKDIR /var/www/blog-src/
 
 # Install composer
-RUN curl -sS https://getcomposer.org/installer -o composer-setup.php \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 
 # Install xdebug
 RUN pecl install xdebug
@@ -35,7 +34,7 @@ RUN docker-php-ext-enable xdebug
 RUN pecl install pcov && docker-php-ext-enable pcov && echo "extension=pcov.so" >> /usr/local/etc/php/php.ini
 
 # Install infection
-RUN wget https://github.com/infection/infection/releases/download/0.26.17/infection.phar \
+RUN wget https://github.com/infection/infection/releases/download/0.26.19/infection.phar \
     && chmod +x infection.phar \
     && mv infection.phar /usr/local/bin/infection
 
