@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace rubenrubiob\Tests\Unit\Domain\ValueObject;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use rubenrubiob\Domain\Exception\ValueObject\ImportIsNotValid;
 use rubenrubiob\Domain\ValueObject\Import;
@@ -36,7 +37,7 @@ final class ImportTest extends TestCase
         );
     }
 
-    /** @dataProvider preuNetIImpostProvider */
+    #[DataProvider('preuNetIImpostProvider')]
     public function test_import_amb_impost_retorna_valors_esperat(
         int $expectedMinorPreuNet,
         int $expectedMinorQuantitatImpostos,
@@ -56,7 +57,7 @@ final class ImportTest extends TestCase
         self::assertSame(self::MONEDA_UPPER, $import->moneda());
     }
 
-    protected function preuNetIImpostProvider(): array
+    public static function preuNetIImpostProvider(): array
     {
         return [
             '5.50 (float)' => [
