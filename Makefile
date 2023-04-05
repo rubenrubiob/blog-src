@@ -31,5 +31,5 @@ destroy: CMD=down
 start startd stop destroy:
 	@docker-compose $(CMD)
 
-interactive-shell: ## jump in an interactive shell inside the running sandbox
+bash: ## jump in an interactive shell inside the running sandbox
 	@docker exec -it blog-src-php bash
