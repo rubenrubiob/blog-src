@@ -13,3 +13,5 @@ services:
     environment:
       XDEBUG_SESSION: PHPSTORM
       PHP_IDE_CONFIG: serverName=docker-localhost
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
