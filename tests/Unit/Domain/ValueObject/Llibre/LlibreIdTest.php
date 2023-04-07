@@ -63,7 +63,7 @@ final class LlibreIdTest extends TestCase
         $firstId = LlibreId::fromString(self::ID);
         $anotherFirstId = LlibreId::fromString(self::ID);
         $anotherId = LlibreId::fromString(self::ANOTHER_ID);
-        
+
         self::assertTrue($firstId->isEqualTo($anotherFirstId));
         self::assertFalse($firstId->isEqualTo($anotherId));
     }
