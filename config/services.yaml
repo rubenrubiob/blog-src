@@ -36,3 +36,11 @@ services:
     # please note that last definitions always *replace* previous ones
     rubenrubiob\Infrastructure\CommandBus\CommandBus: '@rubenrubiob\Infrastructure\CommandBus\TacticianCommandBus'
     rubenrubiob\Infrastructure\QueryBus\QueryBus: '@rubenrubiob\Infrastructure\QueryBus\TacticianQueryBus'
+
+    rubenrubiob\Domain\Repository\Llibre\GetLlibreDTOByLlibreIdRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyGetLlibreDTOByLlibreIdRepository'
+
+    rubenrubiob\Application\Query\:
+        resource: '../src/Application/Query/**'
+        exclude: '../src/Application/Query/*Query.php'
+        tags:
+            - { name: tactician.handler, typehints: true }
