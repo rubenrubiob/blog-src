@@ -7,10 +7,16 @@ namespace rubenrubiob\Tests\Functional;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use function Safe\json_decode;
+use function sprintf;
 
 final class GetLlibreTest extends WebTestCase
 {
+    private const EXISTING_LLIBRE_ID = '080343dc-cb7c-497a-ac4d-a3190c05e323';
+    private const NON_EXISTING_LLIBRE_ID = '4bb201e9-2c07-4a3a-b423-eca329d2f081';
+
     private readonly KernelBrowser $client;
 
     protected function setUp(): void
@@ -20,22 +26,44 @@ final class GetLlibreTest extends WebTestCase
         $this->client = static::createClient();
     }
 
+    public function test_amb_non_existing_llibre_retorna_404(): void
+    {
+        $this->client->request(
+            'GET',
+            $this->url(self::NON_EXISTING_LLIBRE_ID),
+        );
+
+        $response = $this->client->getResponse();
+
+        self::assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+    }
+
     public function test_amb_llibre_retorna_resposta_valida(): void
     {
         $this->client->request(
             'GET',
-            '/llibre/08d591eb-9ab5-454d-9464-09dcea8a3c8b',
+            $this->url(self::EXISTING_LLIBRE_ID),
         );
 
-        $response = json_decode($this->client->getResponse()->getContent(), true);
+        $response = $this->client->getResponse();
+        $responseContent = json_decode($this->client->getResponse()->getContent(), true);
 
+        self::assertSame(Response::HTTP_OK, $response->getStatusCode());
         self::assertEquals(
             [
-                'id' => '08d591eb-9ab5-454d-9464-09dcea8a3c8b',
+                'id' => self::EXISTING_LLIBRE_ID,
                 'titol' => 'Curial e Güelfa',
                 'autor' => 'Anònim',
             ],
-            $response,
+            $responseContent,
+        );
+    }
+
+    private function url(string $llibreId): string
+    {
+        return sprintf(
+            '/llibre/%s',
+            $llibreId
         );
     }
 }
