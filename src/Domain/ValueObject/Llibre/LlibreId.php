@@ -38,6 +38,11 @@ final readonly class LlibreId
         return new self($id);
     }
 
+    public function isEqualTo(LlibreId $anotherLlibreId): bool
+    {
+        return $this->id === $anotherLlibreId->id;
+    }
+
     public function toString(): string
     {
         return $this->id;

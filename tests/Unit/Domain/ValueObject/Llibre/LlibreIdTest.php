@@ -16,6 +16,7 @@ final class LlibreIdTest extends TestCase
     private const ID = '65355b9d-fca9-48f5-b297-19accd1d743f';
     private const ID_WITH_SPACES = ' 65355b9d-fca9-48f5-b297-19accd1d743f ';
     private const ID_UPPER_CASE = '65355B9D-FCA9-48F5-B297-19ACCD1D743F';
+    private const ANOTHER_ID = 'f1388357-4d28-418f-bc10-335d037bcd07';
 
     public function test_that_with_empty_value_throws_expected_exception(): void
     {
@@ -55,5 +56,15 @@ final class LlibreIdTest extends TestCase
             'id with spaces' => [self::ID_WITH_SPACES],
             'id with upper case' => [self::ID_UPPER_CASE],
         ];
+    }
+
+    public function test_that_isEqualTo_returns_correctly(): void
+    {
+        $firstId = LlibreId::fromString(self::ID);
+        $anotherFirstId = LlibreId::fromString(self::ID);
+        $anotherId = LlibreId::fromString(self::ANOTHER_ID);
+        
+        self::assertTrue($firstId->isEqualTo($anotherFirstId));
+        self::assertFalse($firstId->isEqualTo($anotherId));
     }
 }
