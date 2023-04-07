@@ -26,6 +26,7 @@ final readonly class DummyGetLlibreDTOByLlibreIdRepository implements GetLlibreD
         );
     }
 
+    /** @throws LlibreDTONotFound */
     public function __invoke(LlibreId $llibreId): LlibreDTO
     {
         $this->failWhenLlibreIdNotExists($llibreId);
@@ -33,6 +34,7 @@ final readonly class DummyGetLlibreDTOByLlibreIdRepository implements GetLlibreD
         return $this->llibreDTO;
     }
 
+    /** @throws LlibreDTONotFound */
     private function failWhenLlibreIdNotExists(LlibreId $llibreId): void
     {
         if (!$llibreId->isEqualTo($this->llibreDTO->llibreId)) {

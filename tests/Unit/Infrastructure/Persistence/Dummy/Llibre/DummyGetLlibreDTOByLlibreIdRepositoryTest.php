@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace rubenrubiob\Tests\Unit\Infrastructure\Persistence\Dummy\Llibre;
 
 use PHPUnit\Framework\TestCase;
+use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
 use rubenrubiob\Domain\Exception\Repository\Llibre\LlibreDTONotFound;
 use rubenrubiob\Domain\ValueObject\Llibre\LlibreId;
 use rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyGetLlibreDTOByLlibreIdRepository;
@@ -30,7 +31,7 @@ final class DummyGetLlibreDTOByLlibreIdRepositoryTest extends TestCase
 
     public function test_that_with_existing_llibre_id_returns_expected_dto(): void
     {
-        $this->repository->__invoke(LlibreId::fromString(self::NON_EXISTING_ID));
+        $this->repository->__invoke(LlibreId::fromString(self::EXISTING_ID));
 
         $this->expectNotToPerformAssertions();
     }

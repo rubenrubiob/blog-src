@@ -16,7 +16,7 @@ final class LlibreDTONotFound extends Exception
         return new self(
             sprintf(
                 'LlibreDTO with LlibreId "%s" not found',
-                $llibreId,
+                $llibreId->toString(),
             )
         );
     }
