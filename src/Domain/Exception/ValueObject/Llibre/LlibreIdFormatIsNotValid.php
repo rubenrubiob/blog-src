@@ -6,9 +6,11 @@ namespace rubenrubiob\Domain\Exception\ValueObject\Llibre;
 
 use Exception;
 
+use rubenrubiob\Domain\Exception\ValueObject\InvalidValueObject;
+
 use function sprintf;
 
-final class LlibreIdFormatIsNotValid extends Exception
+final class LlibreIdFormatIsNotValid extends Exception implements InvalidValueObject
 {
     public static function withValue(string $value): self
     {
