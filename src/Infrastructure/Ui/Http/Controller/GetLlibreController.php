@@ -21,28 +21,12 @@ final readonly class GetLlibreController
 
     public function __invoke(string $llibreId): Response
     {
-        try {
-            /** @var LlibreDTO $llibreDTO */
-            $llibreDTO = $this->queryBus->__invoke(
-                new GetLlibreDTOByIdQuery(
-                    $llibreId
-                )
-            );
-        } catch (LlibreIdFormatIsNotValid|LlibreIdIsEmpty $e) {
-            return new JsonResponse(
-                [
-                    'error' => $e->getMessage(),
-                ],
-                Response::HTTP_BAD_REQUEST,
-            );
-        } catch (LlibreDTONotFound $e) {
-            return new JsonResponse(
-                [
-                    'error' => $e->getMessage(),
-                ],
-                Response::HTTP_NOT_FOUND,
-            );
-        }
+        /** @var LlibreDTO $llibreDTO */
+        $llibreDTO = $this->queryBus->__invoke(
+            new GetLlibreDTOByIdQuery(
+                $llibreId
+            )
+        );
 
         return new JsonResponse(
             [
