@@ -7,6 +7,8 @@ namespace rubenrubiob\Infrastructure\Ui\Http\Controller;
 use rubenrubiob\Application\Query\Llibre\GetLlibreDTOByIdQuery;
 use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
 use rubenrubiob\Domain\Exception\Repository\Llibre\LlibreDTONotFound;
+use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreIdFormatIsNotValid;
+use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreIdIsEmpty;
 use rubenrubiob\Infrastructure\QueryBus\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +27,13 @@ final readonly class GetLlibreController
                 new GetLlibreDTOByIdQuery(
                     $llibreId
                 )
+            );
+        } catch (LlibreIdFormatIsNotValid|LlibreIdIsEmpty $e) {
+            return new JsonResponse(
+                [
+                    'error' => $e->getMessage(),
+                ],
+                Response::HTTP_BAD_REQUEST,
             );
         } catch (LlibreDTONotFound $e) {
             return new JsonResponse(
