@@ -25,7 +25,7 @@ final readonly class ExceptionResponseSubscriber implements EventSubscriberInter
 
     public static function getSubscribedEvents(): array
     {
-        return [KernelEvents::EXCEPTION => ['__invoke']];
+        return [KernelEvents::EXCEPTION => '__invoke'];
     }
 
     public function __invoke(ExceptionEvent $event): void
