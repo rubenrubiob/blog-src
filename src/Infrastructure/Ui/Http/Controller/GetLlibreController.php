@@ -7,8 +7,6 @@ namespace rubenrubiob\Infrastructure\Ui\Http\Controller;
 use rubenrubiob\Application\Query\Llibre\GetLlibreDTOByIdQuery;
 use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
 use rubenrubiob\Infrastructure\QueryBus\QueryBus;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 final readonly class GetLlibreController
 {
@@ -16,22 +14,12 @@ final readonly class GetLlibreController
     {
     }
 
-    public function __invoke(string $llibreId): Response
+    public function __invoke(string $llibreId): LlibreDTO
     {
-        /** @var LlibreDTO $llibreDTO */
-        $llibreDTO = $this->queryBus->__invoke(
+        return $this->queryBus->__invoke(
             new GetLlibreDTOByIdQuery(
                 $llibreId
             )
-        );
-
-        return new JsonResponse(
-            [
-                'id' => $llibreDTO->llibreId->toString(),
-                'titol' => $llibreDTO->llibreTitol->toString(),
-                'autor' => $llibreDTO->autorNom->toString(),
-            ],
-            Response::HTTP_OK,
         );
     }
 }
