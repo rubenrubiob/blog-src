@@ -23,3 +23,7 @@
 /.idea/
 ###< JetBrains ###
 
+###> XDebug ###
+/xdebug.log
+###< XDebug ###
+

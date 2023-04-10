@@ -18,5 +18,29 @@ services:
         exclude:
             - '../src/Infrastructure/Symfony/Kernel.php'
 
+    # Controllers
+    rubenrubiob\Infrastructure\Ui\Http\Controller\:
+        resource: '../src/Infrastructure/Ui/Http/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+
+    # CommandBus and QueryBus
+    rubenrubiob\Infrastructure\CommandBus\TacticianCommandBus:
+        arguments:
+            $commandBus: '@tactician.commandbus.write'
+    rubenrubiob\Infrastructure\QueryBus\TacticianQueryBus:
+        arguments:
+            $queryBus: '@tactician.commandbus.read'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    rubenrubiob\Infrastructure\CommandBus\CommandBus: '@rubenrubiob\Infrastructure\CommandBus\TacticianCommandBus'
+    rubenrubiob\Infrastructure\QueryBus\QueryBus: '@rubenrubiob\Infrastructure\QueryBus\TacticianQueryBus'
+
+    rubenrubiob\Domain\Repository\Llibre\GetLlibreDTOByLlibreIdRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyGetLlibreDTOByLlibreIdRepository'
+
+    rubenrubiob\Application\Query\:
+        resource: '../src/Application/Query/**'
+        exclude: '../src/Application/Query/*Query.php'
+        tags:
+            - { name: tactician.handler, typehints: true }

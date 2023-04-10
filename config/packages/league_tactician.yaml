@@ -1,0 +1,14 @@
+# Library documentation: http://tactician.thephpleague.com/
+# Bundle documentation: https://github.com/thephpleague/tactician-bundle/blob/v1.0/README.md
+tactician:
+    method_inflector: tactician.handler.method_name_inflector.invoke
+    default_bus: write
+    commandbus:
+        write:
+            middleware:
+                - tactician.middleware.locking
+                - tactician.middleware.command_handler
+        read:
+            middleware:
+                - tactician.middleware.locking
+                - tactician.middleware.command_handler
