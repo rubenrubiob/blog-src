@@ -24,6 +24,7 @@ final readonly class AutorNom
         );
     }
 
+    /** @return non-empty-string */
     public function toString(): string
     {
         return $this->nom;
