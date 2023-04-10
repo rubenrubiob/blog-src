@@ -10,12 +10,13 @@ use rubenrubiob\Domain\ValueObject\Llibre\AutorNom;
 use rubenrubiob\Domain\ValueObject\Llibre\LlibreId;
 use rubenrubiob\Domain\ValueObject\Llibre\LlibreTitol;
 use rubenrubiob\Infrastructure\Ui\Http\Response\Presenter\LlibreDTOPresenter;
+use rubenrubiob\Tests\Common\Generator\Llibre\LlibreDTOGenerator;
 
 final class LlibreDTOPresenterTest extends TestCase
 {
-    private const ID = '24455e19-e74e-4600-9c7b-7abefda5bac6';
-    private const TITOL = 'Odissea';
-    private const AUTOR = 'Homer';
+    private const ID = '132deb5e-f75b-465c-91f8-4c55d40e025a';
+    private const TITOL = 'Crim i càstig';
+    private const AUTOR = 'Dostoievski';
 
     private readonly LlibreDTOPresenter $presenter;
 
@@ -26,17 +27,17 @@ final class LlibreDTOPresenterTest extends TestCase
 
     public function test_that_LlibreDTO_is_correctly_presented(): void
     {
+        $llibreDTO = LlibreDTOGenerator::one(
+            llibreId: self::ID,
+            llibreTitol: self::TITOL,
+            autorNom: self::AUTOR,
+        );
+
         $expectedPresentation = [
             'id' => self::ID,
             'titol' => self::TITOL,
             'autor' => self::AUTOR,
         ];
-
-        $llibreDTO = new LlibreDTO(
-            LlibreId::fromString(self::ID),
-            LlibreTitol::create(self::TITOL),
-            AutorNom::create(self::AUTOR),
-        );
 
         self::assertEquals(
             $expectedPresentation,
