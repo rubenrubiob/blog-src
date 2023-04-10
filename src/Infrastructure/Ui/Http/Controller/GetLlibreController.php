@@ -6,9 +6,6 @@ namespace rubenrubiob\Infrastructure\Ui\Http\Controller;
 
 use rubenrubiob\Application\Query\Llibre\GetLlibreDTOByIdQuery;
 use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
-use rubenrubiob\Domain\Exception\Repository\Llibre\LlibreDTONotFound;
-use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreIdFormatIsNotValid;
-use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreIdIsEmpty;
 use rubenrubiob\Infrastructure\QueryBus\QueryBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
