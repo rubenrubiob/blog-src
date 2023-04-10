@@ -18,7 +18,7 @@ use function Safe\class_implements;
 
 final readonly class ExceptionResponseSubscriber implements EventSubscriberInterface
 {
-    private const RESPONSE_CODE_MAP = [
+    private const EXCEPTION_RESPONSE_HTTP_CODE_MAP = [
         NotFound::class => Response::HTTP_NOT_FOUND,
         InvalidValueObject::class => Response::HTTP_BAD_REQUEST,
     ];
@@ -51,8 +51,8 @@ final readonly class ExceptionResponseSubscriber implements EventSubscriberInter
         $interfaces = class_implements($throwable);
 
         foreach ($interfaces as $interface) {
-            if (array_key_exists($interface, self::RESPONSE_CODE_MAP)) {
-                return self::RESPONSE_CODE_MAP[$interface];
+            if (array_key_exists($interface, self::EXCEPTION_RESPONSE_HTTP_CODE_MAP)) {
+                return self::EXCEPTION_RESPONSE_HTTP_CODE_MAP[$interface];
             }
         }
 
