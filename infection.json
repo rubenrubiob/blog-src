@@ -6,7 +6,7 @@
         ],
         "excludes": [
             "Kernel.php",
-            "{.*/Infrastructure/.*}",
+            "{(.*/)?Infrastructure/.*}",
             "{Domain/Exception/.*}"
         ]
     },

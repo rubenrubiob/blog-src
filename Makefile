@@ -6,19 +6,27 @@ unit-test: ## Execute phpunit unit test
 	@echo "============================"
 	@echo "Executing Unit Test"
 	@echo "============================"
-	@docker exec blog-src-php sh -c "XDEBUG_MODE=off php ./vendor/bin/phpunit -c phpunit.xml.dist --testsuite Unit"
+	@docker exec blog-src-php sh -c "php ./vendor/bin/phpunit -c phpunit.xml.dist --testsuite Unit"
 
-check-code-style: ## verify coding standards are respected
-	docker-compose run --rm sandbox vendor/bin/phpcs
+functional-test: ## Execute phpunit unit test
+	@echo "============================"
+	@echo "Executing Functional Test"
+	@echo "============================"
+	@docker exec blog-src-php sh -c "php ./vendor/bin/phpunit -c phpunit.xml.dist --testsuite Functional"
+
+test: unit-test functional-test
+
+check-code-style:
+	@docker exec blog-src-php sh -c "vendor/bin/phpcs"
 
 phpstan: ## Execute PHPStan
-	@docker exec blog-src-php sh -c "XDEBUG_MODE=off vendor/bin/phpstan analyse"
+	@docker exec blog-src-php sh -c "vendor/bin/phpstan analyse"
 
 psalm: ## Execute Psalm
-	@docker exec blog-src-php sh -c "XDEBUG_MODE=off vendor/bin/psalm"
+	@docker exec blog-src-php sh -c "vendor/bin/psalm --no-cache"
 
 infection: ## Execute infection
-	@docker exec blog-src-php sh -c "XDEBUG_MODE=off infection --threads=max --min-msi=100 --test-framework-options=\"--testsuite=Unit\""
+	@docker exec blog-src-php sh -c "infection --threads=max --min-msi=100 --test-framework-options=\"--testsuite=Unit\""
 
 quality: phpstan psalm infection
 
