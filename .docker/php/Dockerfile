@@ -24,7 +24,7 @@ COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 
 # Install xdebug
 RUN pecl install xdebug
-COPY .docker/php/opcache.ini "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini"
+COPY .docker/php/xdebug.ini "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini"
 
 # Install pcov for code coverage (compatible phunit ^8)
 RUN pecl install pcov && docker-php-ext-enable pcov && echo "extension=pcov.so" >> /usr/local/etc/php/php.ini
