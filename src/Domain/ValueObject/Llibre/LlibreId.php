@@ -43,6 +43,7 @@ final readonly class LlibreId
         return $this->id === $anotherLlibreId->id;
     }
 
+    /** @return non-empty-string */
     public function toString(): string
     {
         return $this->id;

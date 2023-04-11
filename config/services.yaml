@@ -38,6 +38,7 @@ services:
     rubenrubiob\Infrastructure\QueryBus\QueryBus: '@rubenrubiob\Infrastructure\QueryBus\TacticianQueryBus'
 
     rubenrubiob\Domain\Repository\Llibre\GetLlibreDTOByLlibreIdRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyGetLlibreDTOByLlibreIdRepository'
+    rubenrubiob\Domain\Repository\Llibre\FindLlibreDTOsRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyFindLlibreDTOsRepository'
 
     rubenrubiob\Application\Query\:
         resource: '../src/Application/Query/**'

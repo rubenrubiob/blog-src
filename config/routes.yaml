@@ -1,7 +1,10 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+
 llibre_get:
-    path: /llibre/{llibreId}
+    path: /llibres/{llibreId}
     controller: rubenrubiob\Infrastructure\Ui\Http\Controller\GetLlibreController
+    methods: [GET]
+
+llibres_find:
+    path: /llibres
+    controller: rubenrubiob\Infrastructure\Ui\Http\Controller\FindLlibresController
     methods: [GET]

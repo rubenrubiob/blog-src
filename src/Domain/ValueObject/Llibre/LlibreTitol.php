@@ -24,6 +24,7 @@ final readonly class LlibreTitol
         );
     }
 
+    /** @return non-empty-string */
     public function toString(): string
     {
         return $this->titol;

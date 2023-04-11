@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace rubenrubiob\Infrastructure\Ui\Http\Controller;
 
-use rubenrubiob\Application\Query\Llibre\GetLlibreDTOByIdQuery;
+use rubenrubiob\Application\Query\Llibre\FindLlibreDTOsQuery;
 use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
 use rubenrubiob\Infrastructure\QueryBus\QueryBus;
 
-final readonly class GetLlibreController
+final readonly class FindLlibresController
 {
     public function __construct(private QueryBus $queryBus)
     {
     }
 
-    public function __invoke(string $llibreId): LlibreDTO
+    /** @return list<LlibreDTO> */
+    public function __invoke(): array
     {
         return $this->queryBus->__invoke(
-            new GetLlibreDTOByIdQuery(
-                $llibreId
-            )
+            new FindLlibreDTOsQuery()
         );
     }
 }

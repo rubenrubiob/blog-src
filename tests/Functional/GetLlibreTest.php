@@ -88,7 +88,7 @@ final class GetLlibreTest extends WebTestCase
     private function url(string $llibreId): string
     {
         return sprintf(
-            '/llibre/%s',
+            '/llibres/%s',
             $llibreId
         );
     }

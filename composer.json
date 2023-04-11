@@ -17,6 +17,7 @@
         "symfony/flex": "^1.17|^2.2.5",
         "symfony/framework-bundle": "5.4.*",
         "symfony/runtime": "5.4.*",
+        "symfony/serializer": "5.4.*",
         "symfony/yaml": "5.4.*",
         "thecodingmachine/phpstan-safe-rule": "^1.2",
         "thecodingmachine/safe": "^2.4"

@@ -37,7 +37,7 @@ final class ExceptionResponseSubscriberTest extends TestCase
     {
         self::assertSame(
             [KernelEvents::EXCEPTION => '__invoke'],
-            ExceptionResponseSubscriber::getSubscribedEvents()
+            $this->subscriber::getSubscribedEvents()
         );
     }
 
