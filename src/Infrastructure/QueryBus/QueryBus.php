@@ -4,10 +4,19 @@ declare(strict_types=1);
 
 namespace rubenrubiob\Infrastructure\QueryBus;
 
+use rubenrubiob\Application\Query;
 use Throwable;
 
 interface QueryBus
 {
-    /** @throws Throwable */
-    public function __invoke(object $query): mixed;
+    /**
+     * @template T
+     *
+     * @param Query<T> $query
+     *
+     * @return T
+     *
+     * @throws Throwable
+     */
+    public function __invoke(Query $query): mixed;
 }
