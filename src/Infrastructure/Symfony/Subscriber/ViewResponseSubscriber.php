@@ -27,6 +27,20 @@ final readonly class ViewResponseSubscriber implements EventSubscriberInterface
 
     public function __invoke(ViewEvent $event): void
     {
+        $controllerResult = $event->getControllerResult();
+
+        if ($controllerResult === null) {
+            $event->setResponse(
+                new Response(
+                    null,
+                    Response::HTTP_NO_CONTENT,
+                    self::HEADERS,
+                )
+            );
+
+            return;
+        }
+
         $response = new Response(
             $this->serializer->serialize(
                 $event->getControllerResult(),
