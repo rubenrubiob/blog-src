@@ -27,6 +27,7 @@ final readonly class ViewResponseSubscriber implements EventSubscriberInterface
 
     public function __invoke(ViewEvent $event): void
     {
+        /** @var mixed|null $controllerResult */
         $controllerResult = $event->getControllerResult();
 
         if ($controllerResult === null) {

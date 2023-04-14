@@ -81,7 +81,7 @@ final readonly class ValinorMapperRegisterConstructorCompilerPass implements Com
     }
 
     /**
-     * @return Generator<mixed, ReflectionClass<ValueObject>>
+     * @return Generator<mixed, ReflectionClass<object>>
      */
     private function valueObjectsWithNamedConstructor(): iterable
     {
