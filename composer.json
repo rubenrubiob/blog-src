@@ -9,6 +9,8 @@
         "ext-iconv": "*",
         "brick/math": "^0.10.0",
         "brick/money": "^0.8.0",
+        "cuyz/valinor": "^1.3",
+        "league/construct-finder": "^1.2",
         "league/tactician": "^1.1",
         "league/tactician-bundle": "^1.4",
         "ramsey/uuid": "^4.7",
