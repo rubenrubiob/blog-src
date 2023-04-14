@@ -6,9 +6,11 @@ namespace rubenrubiob\Domain\ValueObject\Llibre;
 
 use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreTitolIsEmpty;
 
+use rubenrubiob\Domain\ValueObject\ValueObject;
+
 use function trim;
 
-final readonly class LlibreTitol
+final readonly class LlibreTitol implements ValueObject
 {
     private function __construct(
         /** @var non-empty-string */
@@ -22,6 +24,11 @@ final readonly class LlibreTitol
         return new self(
             self::parseAndValidate($titol)
         );
+    }
+
+    public static function defaultNamedConstructor(): callable
+    {
+        return [self::class, 'create'];
     }
 
     /** @return non-empty-string */

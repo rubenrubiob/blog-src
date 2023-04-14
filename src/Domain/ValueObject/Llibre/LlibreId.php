@@ -8,10 +8,12 @@ use Ramsey\Uuid\Uuid;
 use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreIdFormatIsNotValid;
 use rubenrubiob\Domain\Exception\ValueObject\Llibre\LlibreIdIsEmpty;
 
+use rubenrubiob\Domain\ValueObject\ValueObject;
+
 use function strtolower;
 use function trim;
 
-final readonly class LlibreId
+final readonly class LlibreId implements ValueObject
 {
     private function __construct(
         /** @var non-empty-string */
@@ -36,6 +38,11 @@ final readonly class LlibreId
         self::validate($id);
 
         return new self($id);
+    }
+
+    public static function defaultNamedConstructor(): callable
+    {
+        return [self::class, 'fromString'];
     }
 
     public function isEqualTo(LlibreId $anotherLlibreId): bool

@@ -27,4 +27,12 @@ final class LlibreTitolTest extends TestCase
             LlibreTitol::create(self::TITOL_WITH_SPACES)->toString(),
         );
     }
+
+    public function test_that_default_named_constructor_is_valid(): void
+    {
+        self::assertSame(
+            [LlibreTitol::class, 'create'],
+            LlibreTitol::defaultNamedConstructor()
+        );
+    }
 }
