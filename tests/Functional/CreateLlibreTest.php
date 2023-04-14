@@ -66,6 +66,12 @@ final class CreateLlibreTest extends WebTestCase
                     self::KEY_AUTOR => 1,
                 ],
             ],
+            'llibre i autor empty string' => [
+                [
+                    self::KEY_TITOL => ' ',
+                    self::KEY_AUTOR => ' ',
+                ],
+            ],
         ];
     }
 
