@@ -72,12 +72,6 @@ final readonly class ValinorMapperRegisterConstructorCompilerPass implements Com
         }
 
         $mapperBuilderDefinition->addMethodCall(
-            'enableFlexibleCasting',
-            [],
-            true
-        );
-
-        $mapperBuilderDefinition->addMethodCall(
             'allowSuperfluousKeys',
             [],
             true
