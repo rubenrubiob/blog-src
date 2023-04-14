@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use rubenrubiob\Domain\Exception\Repository\NotFound;
 use rubenrubiob\Domain\Exception\ValueObject\InvalidValueObject;
+use rubenrubiob\Infrastructure\Symfony\Http\Exception\InvalidRequest;
 use rubenrubiob\Infrastructure\Symfony\Kernel;
 use rubenrubiob\Infrastructure\Symfony\Subscriber\ExceptionResponseSubscriber;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,6 +93,10 @@ final class ExceptionResponseSubscriberTest extends TestCase
                         return [];
                     }
                 },
+            ],
+            'InvalidRequest' => [
+                Response::HTTP_BAD_REQUEST,
+                new InvalidRequest(self::EXCEPTION_MESSAGE),
             ],
             'NotFound' => [
                 Response::HTTP_NOT_FOUND,
