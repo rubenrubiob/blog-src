@@ -10,6 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Throwable;
 
@@ -47,6 +48,10 @@ final readonly class ExceptionResponseSubscriber implements EventSubscriberInter
 
     private function httpCode(Throwable $throwable): int
     {
+        if ($throwable instanceof HttpExceptionInterface) {
+            return $throwable->getStatusCode();
+        }
+
         /** @var class-string[] $interfaces */
         $interfaces = class_implements($throwable);
 

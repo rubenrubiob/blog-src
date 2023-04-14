@@ -14,6 +14,7 @@ use rubenrubiob\Infrastructure\Symfony\Subscriber\ExceptionResponseSubscriber;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -78,6 +79,20 @@ final class ExceptionResponseSubscriberTest extends TestCase
     public static function throwableWithCodeProvider(): array
     {
         return [
+            'Symfony HttpException' => [
+                Response::HTTP_I_AM_A_TEAPOT,
+                new class (self::EXCEPTION_MESSAGE) extends Exception implements HttpExceptionInterface {
+                    public function getStatusCode()
+                    {
+                        return Response::HTTP_I_AM_A_TEAPOT;
+                    }
+
+                    public function getHeaders()
+                    {
+                        return [];
+                    }
+                },
+            ],
             'NotFound' => [
                 Response::HTTP_NOT_FOUND,
                 new class (self::EXCEPTION_MESSAGE) extends Exception implements NotFound {},
