@@ -71,7 +71,7 @@ final class LlibreIdTest extends TestCase
     public function test_that_default_named_constructor_is_valid(): void
     {
         self::assertSame(
-            [LlibreId::class, 'create'],
+            [LlibreId::class, 'fromString'],
             LlibreId::defaultNamedConstructor()
         );
     }
