@@ -33,6 +33,12 @@ infection: ## Execute infection
 
 quality: phpstan psalm infection
 
+symfony-lint-container:
+	@docker exec blog-src sh -c "XDEBUG_MODE=off bin/console lint:container"
+
+symfony-lint-yaml:
+	@docker exec blog-src sh -c "XDEBUG_MODE=off bin/console lint:yaml config src"
+
 # Docker Compose
 start: CMD=up
 startd: CMD=up -d
