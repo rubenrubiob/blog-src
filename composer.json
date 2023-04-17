@@ -1,5 +1,6 @@
 {
     "name": "rubenrubiob/blog-src",
+    "description": "Source code for blog examples",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
