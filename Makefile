@@ -2,6 +2,9 @@
 
 current-dir := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
+composer-install:
+	@docker exec blog-src-php sh -c "composer install"
+
 unit-test: ## Execute phpunit unit test
 	@echo "============================"
 	@echo "Executing Unit Test"
