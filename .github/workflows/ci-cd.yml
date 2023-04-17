@@ -51,7 +51,7 @@ jobs:
             mv /tmp/docker-cache-new /tmp/docker-cache
   test:
     runs-on: ubuntu-latest
-    needs: [Google-Test]
+    needs: [setup]
     steps:
       # Tests
       - name: Run Unit Tests
