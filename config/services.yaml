@@ -39,9 +39,17 @@ services:
 
     rubenrubiob\Domain\Repository\Llibre\GetLlibreDTOByLlibreIdRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyGetLlibreDTOByLlibreIdRepository'
     rubenrubiob\Domain\Repository\Llibre\FindLlibreDTOsRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyFindLlibreDTOsRepository'
+    rubenrubiob\Domain\Repository\Llibre\GetLlibreNextIdentityRepository: '@rubenrubiob\Infrastructure\Persistence\Dummy\Llibre\DummyGetLlibreNextIdentityRepository'
+    rubenrubiob\Domain\Repository\Llibre\LlibreWriteRepository: '@rubenrubiob\Infrastructure\Persistence\InMemory\Llibre\InMemoryLlibreWriteRepository'
 
     rubenrubiob\Application\Query\:
         resource: '../src/Application/Query/**'
         exclude: '../src/Application/Query/*Query.php'
+        tags:
+            - { name: tactician.handler, typehints: true }
+
+    rubenrubiob\Application\Command\:
+        resource: '../src/Application/Command/**'
+        exclude: '../src/Application/Command/*Command.php'
         tags:
             - { name: tactician.handler, typehints: true }

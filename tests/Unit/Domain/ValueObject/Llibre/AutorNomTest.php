@@ -27,4 +27,12 @@ final class AutorNomTest extends TestCase
             AutorNom::create(self::NOM_WITH_SPACES)->toString(),
         );
     }
+
+    public function test_that_default_named_constructor_is_valid(): void
+    {
+        self::assertSame(
+            [AutorNom::class, 'create'],
+            AutorNom::defaultNamedConstructor()
+        );
+    }
 }

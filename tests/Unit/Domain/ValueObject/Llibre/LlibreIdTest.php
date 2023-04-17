@@ -67,4 +67,12 @@ final class LlibreIdTest extends TestCase
         self::assertTrue($firstId->isEqualTo($anotherFirstId));
         self::assertFalse($firstId->isEqualTo($anotherId));
     }
+
+    public function test_that_default_named_constructor_is_valid(): void
+    {
+        self::assertSame(
+            [LlibreId::class, 'fromString'],
+            LlibreId::defaultNamedConstructor()
+        );
+    }
 }

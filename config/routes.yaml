@@ -8,3 +8,8 @@ llibres_find:
     path: /llibres
     controller: rubenrubiob\Infrastructure\Ui\Http\Controller\FindLlibresController
     methods: [GET]
+
+llibres_create:
+    path: /llibres
+    controller: rubenrubiob\Infrastructure\Ui\Http\Controller\CreateLlibreController
+    methods: [POST]

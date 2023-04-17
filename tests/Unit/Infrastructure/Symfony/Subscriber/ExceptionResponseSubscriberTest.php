@@ -9,11 +9,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use rubenrubiob\Domain\Exception\Repository\NotFound;
 use rubenrubiob\Domain\Exception\ValueObject\InvalidValueObject;
+use rubenrubiob\Infrastructure\Symfony\Http\Exception\InvalidRequest;
 use rubenrubiob\Infrastructure\Symfony\Kernel;
 use rubenrubiob\Infrastructure\Symfony\Subscriber\ExceptionResponseSubscriber;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -78,6 +80,24 @@ final class ExceptionResponseSubscriberTest extends TestCase
     public static function throwableWithCodeProvider(): array
     {
         return [
+            'Symfony HttpException' => [
+                Response::HTTP_I_AM_A_TEAPOT,
+                new class (self::EXCEPTION_MESSAGE) extends Exception implements HttpExceptionInterface {
+                    public function getStatusCode()
+                    {
+                        return Response::HTTP_I_AM_A_TEAPOT;
+                    }
+
+                    public function getHeaders()
+                    {
+                        return [];
+                    }
+                },
+            ],
+            'InvalidRequest' => [
+                Response::HTTP_BAD_REQUEST,
+                new InvalidRequest(self::EXCEPTION_MESSAGE),
+            ],
             'NotFound' => [
                 Response::HTTP_NOT_FOUND,
                 new class (self::EXCEPTION_MESSAGE) extends Exception implements NotFound {},
