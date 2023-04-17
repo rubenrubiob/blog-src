@@ -1,7 +1,7 @@
 name: 'setup'
 description: 'Set up project with dependencies (database, composer...)'
 runs:
-  runs-on: ubuntu-latest
+  using: "composite"
   steps:
     # Setup
     - name: Code checkout
@@ -32,4 +32,5 @@ runs:
         restore-keys: |
           ${{ runner.os }}-test-docker-
     - name: Start environment
+      shell: bash
       run: docker compose -f docker-compose-ci.yml up -d
