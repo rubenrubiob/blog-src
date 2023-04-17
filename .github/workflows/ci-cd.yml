@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
+  composer-install:
       runs-on: ubuntu-latest
       steps:
         - name: Code checkout
@@ -20,6 +20,8 @@ jobs:
           run: |
             rm -rf /tmp/docker-cache
             mv /tmp/docker-cache-new /tmp/docker-cache
+        - name: Make composer install
+          run: make composer-install
   test:
     runs-on: ubuntu-latest
     needs: [setup]
@@ -27,7 +29,7 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v3
       - name: Setup
-        uses: ./.github/actions/action-setup.yaml
+        uses: ./.github/actions/setup/
       # Tests
       - name: Run Unit Tests
         run: make unit-test
@@ -46,7 +48,7 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v3
       - name: Setup
-        uses: ./.github/actions/action-setup.yaml
+        uses: ./.github/actions/setup/
       # Tests
       - name: PHPStan
         run: make phpstan
