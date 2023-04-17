@@ -11,39 +11,8 @@ jobs:
   setup:
       runs-on: ubuntu-latest
       steps:
-        # Setup
-        - name: Code checkout
-          uses: actions/checkout@v3
-        - name: Misc caches
-          uses: actions/cache@v3
-          with:
-            path: |
-              .phpstan.cache
-              .phpunit.cache
-            key: ${{ runner.os }}-test-misc-${{ github.sha }}
-            restore-keys: |
-              ${{ runner.os }}-test-misc-
-        - name: Cache vendor directory
-          uses: actions/cache@v3
-          with:
-            path: ./vendor
-            key: ${{ runner.os }}-test-vendor-${{ hashFiles('./composer.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-test-vendor-
-        - name: Set up Docker Buildx
-          uses: docker/setup-buildx-action@v2
-        - name: Cache Docker build
-          uses: actions/cache@v3
-          with:
-            path: /tmp/docker-cache
-            key: ${{ runner.os }}-test-docker-${{ github.sha }}
-            restore-keys: |
-              ${{ runner.os }}-test-docker-
-        - name: Start environment
-          run: docker compose -f docker-compose-ci.yml up -d
-        - name: Make composer install
-          run: make composer-install
-
+        - name: Setup
+          uses: ./.github/actions/action-setup.yaml
         # Cleanup
         - name: Move cache
           run: |
@@ -53,35 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [setup]
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v3
-      - name: Misc caches
-        uses: actions/cache@v3
-        with:
-          path: |
-            .phpstan.cache
-            .phpunit.cache
-          key: ${{ runner.os }}-test-misc-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-test-misc-
-      - name: Cache vendor directory
-        uses: actions/cache@v3
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-test-vendor-${{ hashFiles('./composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-test-vendor-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Cache Docker build
-        uses: actions/cache@v3
-        with:
-          path: /tmp/docker-cache
-          key: ${{ runner.os }}-test-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-test-docker-
-      - name: Start environment
-        run: docker compose -f docker-compose-ci.yml up -d
+      - name: Setup
+        uses: ./.github/actions/action-setup.yaml
       # Tests
       - name: Run Unit Tests
         run: make unit-test
@@ -97,35 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [setup]
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v3
-      - name: Misc caches
-        uses: actions/cache@v3
-        with:
-          path: |
-            .phpstan.cache
-            .phpunit.cache
-          key: ${{ runner.os }}-test-misc-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-test-misc-
-      - name: Cache vendor directory
-        uses: actions/cache@v3
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-test-vendor-${{ hashFiles('./composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-test-vendor-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Cache Docker build
-        uses: actions/cache@v3
-        with:
-          path: /tmp/docker-cache
-          key: ${{ runner.os }}-test-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-test-docker-
-      - name: Start environment
-        run: docker compose -f docker-compose-ci.yml up -d
+      - name: Setup
+        uses: ./.github/actions/action-setup.yaml
       # Tests
       - name: PHPStan
         run: make phpstan
