@@ -58,10 +58,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup
         uses: ./.github/actions/setup/
-      - name: Lint Container
-        run: make symfony-lint-container
-      - name: Lint Yaml
-        run: make symfony-lint-yaml
+      - name: Composer Validate
+        run: make composer-validate
+      - name: Composer Require Checker
+        run: make composer-require-checker
+      - name: Composer Unused
+        run: make composer-unused
 
   symfony-checks:
     runs-on: ubuntu-latest
