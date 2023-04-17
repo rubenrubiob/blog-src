@@ -17,6 +17,7 @@ services:
         resource: '../src/Infrastructure'
         exclude:
             - '../src/Infrastructure/Symfony/Kernel.php'
+            - '../src/Infrastructure/Ui/Http/Request'
 
     # Controllers
     rubenrubiob\Infrastructure\Ui\Http\Controller\:
