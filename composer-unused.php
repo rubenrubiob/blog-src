@@ -19,6 +19,7 @@ return static function (Configuration $config): Configuration {
         ->addNamedFilter(NamedFilter::fromString('ext-ctype'))
         ->addNamedFilter(NamedFilter::fromString('ext-iconv'))
         ->addNamedFilter(NamedFilter::fromString('thecodingmachine/phpstan-safe-rule'))
+        ->addNamedFilter(NamedFilter::fromString('symfony/dotenv'))
         ->addNamedFilter(NamedFilter::fromString('symfony/flex'))
         ->addNamedFilter(NamedFilter::fromString('symfony/runtime'))
         ;
