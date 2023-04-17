@@ -62,6 +62,8 @@ jobs:
           key: ${{ runner.os }}-test-docker-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-test-docker-
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       - name: Start environment
         run: docker compose -f docker-compose-ci.yml up -d
       # Tests
