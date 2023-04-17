@@ -40,7 +40,7 @@ jobs:
             restore-keys: |
               ${{ runner.os }}-test-docker-
         - name: Start environment
-          run: docker compose -f docker-compose.yml up -d
+          run: docker compose -f docker-compose-ci.yml up -d
         - name: Make composer install
           run: make composer-install
 
