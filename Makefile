@@ -34,10 +34,19 @@ infection: ## Execute infection
 quality: phpstan psalm infection
 
 symfony-lint-container:
-	@docker exec blog-src sh -c "XDEBUG_MODE=off bin/console lint:container"
+	@docker exec blog-src-php sh -c "XDEBUG_MODE=off bin/console lint:container"
 
 symfony-lint-yaml:
-	@docker exec blog-src sh -c "XDEBUG_MODE=off bin/console lint:yaml config src"
+	@docker exec blog-src-php sh -c "XDEBUG_MODE=off bin/console lint:yaml config src"
+
+composer-validate:
+	@docker exec blog-src-php sh -c "composer validate --strict"
+
+composer-require-checker:
+	@docker exec blog-src-php sh -c "composer-require-checker"
+
+composer-unused:
+	@docker exec blog-src-php sh -c "composer-unused"
 
 # Docker Compose
 start: CMD=up
@@ -47,6 +56,11 @@ destroy: CMD=down
 
 start startd stop destroy:
 	@docker-compose $(CMD)
+
+rebuild: ## Destroy and start again the containers
+	make destroy
+	docker-compose build --pull --force-rm --no-cache
+	make startd
 
 bash: ## jump in an interactive shell inside the running sandbox
 	@docker exec -it blog-src-php bash

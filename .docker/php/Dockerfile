@@ -38,3 +38,13 @@ RUN wget https://github.com/infection/infection/releases/download/0.26.19/infect
 RUN wget https://github.com/qossmic/deptrac/releases/download/1.0.2/deptrac.phar \
     && chmod +x deptrac.phar \
     && mv deptrac.phar /usr/local/bin/deptrac
+
+# Install ComposerRequireChecker
+RUN wget https://github.com/maglnet/ComposerRequireChecker/releases/download/4.5.0/composer-require-checker.phar \
+    && chmod +x composer-require-checker.phar \
+    && mv composer-require-checker.phar /usr/local/bin/composer-require-checker
+
+# Install ComposerUnused
+RUN wget https://github.com/composer-unused/composer-unused/releases/download/0.8.7/composer-unused.phar \
+    && chmod +x composer-unused.phar \
+    && mv composer-unused.phar /usr/local/bin/composer-unused
