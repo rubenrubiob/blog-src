@@ -55,24 +55,6 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v3
-      - name: Misc caches
-        uses: actions/cache@v3
-        with:
-          path: |
-            .phpstan.cache
-            .phpunit.cache
-          key: ${{ runner.os }}-test-misc-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-test-misc-
-      - name: Cache vendor directory
-        uses: actions/cache@v3
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-test-vendor-${{ hashFiles('./composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-test-vendor-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
       - name: Cache Docker build
         uses: actions/cache@v3
         with:
