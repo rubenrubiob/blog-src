@@ -76,7 +76,7 @@ components:
           autor: Anònim
   responses:
     Llibre:
-      description: Example response
+      description: Llibre
       content:
         application/json:
           schema:
@@ -88,7 +88,7 @@ components:
                 titol: Curial e Güelfa
                 autor: Anònim
     LlibreCollection:
-      description: Example response
+      description: LlibreCollection
       content:
         application/json:
           schema:
@@ -105,7 +105,7 @@ components:
                   titol: Tirant Lo Blanc
                   autor: Joanot Martorell
     Error:
-      description: Example response
+      description: Error
       content:
         application/json:
           schema:
