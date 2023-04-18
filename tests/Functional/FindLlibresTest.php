@@ -4,28 +4,20 @@ declare(strict_types=1);
 
 namespace rubenrubiob\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 use function Safe\json_decode;
 
-final class FindLlibresTest extends WebTestCase
+final class FindLlibresTest extends FunctionalBaseTestCase
 {
-    private readonly KernelBrowser $client;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->client = static::createClient();
-    }
+    private const REQUEST_METHOD = 'GET';
+    private const URI = '/llibres';
 
     public function test_retorna_resposta_valida(): void
     {
         $this->client->request(
-            'GET',
-            '/llibres',
+            self::REQUEST_METHOD,
+            self::URI,
         );
 
         $response = $this->client->getResponse();
@@ -49,5 +41,7 @@ final class FindLlibresTest extends WebTestCase
             ],
             $responseContent,
         );
+
+        $this->openApiResponseAssert->__invoke($response, self::URI, self::REQUEST_METHOD);
     }
 }
