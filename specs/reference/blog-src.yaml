@@ -1,0 +1,140 @@
+openapi: 3.1.0
+x-stoplight:
+  id: 24x4zf9ky84cj
+info:
+  title: blog-src
+  version: '1.0'
+  summary: Sample API definition
+servers:
+  - url: 'http://blog-src.localhost'
+    description: Local
+paths:
+  '/llibres/{llibreId}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: llibreId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Llibre'
+        '400':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
+      operationId: get-llibres-llibreId
+      description: Get a Llibre by its id
+  /llibres:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/LlibreCollection'
+      operationId: get-llibres
+    post:
+      summary: ''
+      operationId: post-llibres
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Error'
+      requestBody:
+        $ref: '#/components/requestBodies/CrearLlibre'
+components:
+  schemas:
+    Llibre:
+      title: Llibre
+      x-stoplight:
+        id: k68pai2h2b5se
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        titol:
+          type: string
+          minLength: 1
+          readOnly: true
+        autor:
+          type: string
+          minLength: 1
+          readOnly: true
+      required:
+        - id
+        - titol
+      examples:
+        - id: c59620eb-c0ab-4a0c-8354-5a20faf537e5
+          titol: Curial e Güelfa
+          autor: Anònim
+  responses:
+    Llibre:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Llibre'
+          examples:
+            Example 1:
+              value:
+                id: c59620eb-c0ab-4a0c-8354-5a20faf537e5
+                titol: Curial e Güelfa
+                autor: Anònim
+    LlibreCollection:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Llibre'
+          examples:
+            Example 1:
+              value:
+                - id: c59620eb-c0ab-4a0c-8354-5a20faf537e5
+                  titol: Curial e Güelfa
+                  autor: Anònim
+                - id: 4f9d75b7-5dd4-4d19-8a31-8876d54cddee
+                  titol: Tirant Lo Blanc
+                  autor: Joanot Martorell
+    Error:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+          examples:
+            Example 1:
+              value:
+                id: LlibreDTO with LlibreId "c59620eb-c0ab-4a0c-8354-5a20faf537e5" not found
+  requestBodies:
+    CrearLlibre:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              titol:
+                type: string
+                minLength: 1
+              autor:
+                type: string
+                minLength: 1
+            required:
+              - titol
+              - autor
+          examples:
+            Example 1:
+              value:
+                titol: Curial e Güelfa
+                autor: Anònim
