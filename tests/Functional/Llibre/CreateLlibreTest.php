@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace rubenrubiob\Tests\Functional;
+namespace rubenrubiob\Tests\Functional\Llibre;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use rubenrubiob\Domain\Repository\Llibre\LlibreWriteRepository;
 use rubenrubiob\Infrastructure\Persistence\InMemory\Llibre\InMemoryLlibreWriteRepository;
+use rubenrubiob\Tests\Functional\FunctionalBaseTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 use function Safe\json_encode;

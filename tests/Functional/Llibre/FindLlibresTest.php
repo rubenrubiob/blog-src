@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace rubenrubiob\Tests\Functional;
+namespace rubenrubiob\Tests\Functional\Llibre;
 
+use rubenrubiob\Tests\Functional\FunctionalBaseTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 use function Safe\json_decode;
