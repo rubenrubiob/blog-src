@@ -19,6 +19,10 @@
 /.phpunit.cache/
 ###< phpunit/phpunit ###
 
+###> Deptrac ###
+/.deptrac.hexagonal-layers.cache
+###< Deptrac ###
+
 ###> JetBrains ###
 /.idea/
 ###< JetBrains ###
