@@ -18,7 +18,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get Llibre by id
       tags: []
       responses:
         '200':
@@ -31,14 +31,14 @@ paths:
       description: Get a Llibre by its id
   /llibres:
     get:
-      summary: Your GET endpoint
+      summary: Get Llibres
       tags: []
       responses:
         '200':
           $ref: '#/components/responses/LlibreCollection'
       operationId: get-llibres
     post:
-      summary: ''
+      summary: Crear llibres
       operationId: post-llibres
       responses:
         '204':
