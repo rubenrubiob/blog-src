@@ -33,11 +33,14 @@ infection: ## Execute infection
 
 quality: phpstan psalm infection
 
+architecture-hexagonal-layers:
+	@docker exec blog-src-php sh -c "deptrac analyse --config-file=hexagonal-layers.depfile.yaml --cache-file=.deptrac.hexagonal-layers.cache"
+
 symfony-lint-container:
-	@docker exec blog-src-php sh -c "XDEBUG_MODE=off bin/console lint:container"
+	@docker exec blog-src-php sh -c "bin/console lint:container"
 
 symfony-lint-yaml:
-	@docker exec blog-src-php sh -c "XDEBUG_MODE=off bin/console lint:yaml config src"
+	@docker exec blog-src-php sh -c "bin/console lint:yaml config src"
 
 composer-validate:
 	@docker exec blog-src-php sh -c "composer validate --strict"
