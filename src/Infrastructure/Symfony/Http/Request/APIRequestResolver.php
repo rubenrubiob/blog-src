@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace rubenrubiob\Infrastructure\Symfony\Http\Request;
 
 use CuyZ\Valinor\Mapper\MappingError;
+use CuyZ\Valinor\Mapper\Source\Exception\InvalidSource;
 use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\TreeMapper;
 use ReflectionClass;
@@ -44,7 +45,7 @@ final readonly class APIRequestResolver implements ValueResolverInterface
                 $class,
                 Source::json($request->getContent())->camelCaseKeys(),
             );
-        } catch (MappingError) {
+        } catch (MappingError|InvalidSource) {
             throw InvalidRequest::createFromBadMapping();
         }
 
