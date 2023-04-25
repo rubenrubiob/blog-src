@@ -11,39 +11,18 @@ use ReflectionClass;
 use ReflectionException;
 use rubenrubiob\Infrastructure\Symfony\Http\Exception\InvalidRequest;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use function count;
 
-final readonly class APIRequestResolver implements ArgumentValueResolverInterface
+final readonly class APIRequestResolver implements ValueResolverInterface
 {
     public function __construct(
         private TreeMapper $treeMapper,
         private ValidatorInterface $validator,
     ) {
-    }
-
-    public function supports(Request $request, ArgumentMetadata $argument): bool
-    {
-        /** @var class-string|null $className */
-        $className = $argument->getType();
-
-        if ($className === null) {
-            return false;
-        }
-
-        try {
-            $reflection = new ReflectionClass($className);
-
-            if ($reflection->implementsInterface(APIRequestBody::class)) {
-                return true;
-            }
-        } catch (ReflectionException) {
-        }
-
-        return false;
     }
 
     /**
@@ -53,19 +32,17 @@ final readonly class APIRequestResolver implements ArgumentValueResolverInterfac
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        /** @var class-string<APIRequestBody>|null $class */
+        /** @var class-string|null $class */
         $class = $argument->getType();
 
-        if ($class === null) {
-            yield null;
-
-            return;
+        if (! $this->supports($class)) {
+            return [null];
         }
 
         try {
             $request = $this->treeMapper->map(
                 $class,
-                Source::json((string) $request->getContent())->camelCaseKeys(),
+                Source::json($request->getContent())->camelCaseKeys(),
             );
         } catch (MappingError) {
             throw InvalidRequest::createFromBadMapping();
@@ -78,5 +55,29 @@ final readonly class APIRequestResolver implements ArgumentValueResolverInterfac
         }
 
         yield $request;
+    }
+
+    /**
+     * @param class-string|null $class
+     *
+     * @psalm-assert-if-true class-string<APIRequestBody> $class
+     * @phpstan-assert-if-true class-string<APIRequestBody> $class
+     */
+    private function supports(?string $class): bool
+    {
+        if ($class === null) {
+            return false;
+        }
+
+        try {
+            $reflection = new ReflectionClass($class);
+
+            if ($reflection->implementsInterface(APIRequestBody::class)) {
+                return true;
+            }
+        } catch (ReflectionException) {
+        }
+
+        return false;
     }
 }

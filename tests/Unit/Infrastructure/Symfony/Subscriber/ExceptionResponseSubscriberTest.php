@@ -83,12 +83,12 @@ final class ExceptionResponseSubscriberTest extends TestCase
             'Symfony HttpException' => [
                 Response::HTTP_I_AM_A_TEAPOT,
                 new class (self::EXCEPTION_MESSAGE) extends Exception implements HttpExceptionInterface {
-                    public function getStatusCode()
+                    public function getStatusCode(): int
                     {
                         return Response::HTTP_I_AM_A_TEAPOT;
                     }
 
-                    public function getHeaders()
+                    public function getHeaders(): array
                     {
                         return [];
                     }

@@ -9,37 +9,37 @@
         "php": "8.2.*",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "brick/math": "^0.10.0",
+        "brick/math": "^0.11.0",
         "brick/money": "^0.8.0",
-        "cuyz/valinor": "^1.3",
-        "league/construct-finder": "^1.2",
+        "cuyz/valinor": "^1.4",
+        "league/construct-finder": "^1.2.2",
         "league/tactician": "^1.1",
         "league/tactician-bundle": "^1.4",
-        "ramsey/uuid": "^4.7",
-        "symfony/console": "5.4.*",
-        "symfony/dependency-injection": "5.4.*",
-        "symfony/dotenv": "5.4.*",
-        "symfony/event-dispatcher": "5.4.*",
+        "ramsey/uuid": "^4.7.4",
+        "symfony/console": "6.2.*",
+        "symfony/dependency-injection": "6.2.*",
+        "symfony/dotenv": "6.2.*",
+        "symfony/event-dispatcher": "6.2.*",
         "symfony/flex": "^1.17|^2.2.5",
-        "symfony/framework-bundle": "5.4.*",
-        "symfony/http-foundation": "5.4.*",
-        "symfony/http-kernel": "5.4.*",
-        "symfony/runtime": "5.4.*",
-        "symfony/serializer": "5.4.*",
-        "symfony/validator": "5.4.*",
-        "symfony/yaml": "5.4.*",
+        "symfony/framework-bundle": "6.2.*",
+        "symfony/http-foundation": "6.2.*",
+        "symfony/http-kernel": "6.2.*",
+        "symfony/runtime": "6.2.*",
+        "symfony/serializer": "6.2.*",
+        "symfony/validator": "6.2.*",
+        "symfony/yaml": "6.2.*",
         "thecodingmachine/phpstan-safe-rule": "^1.2",
-        "thecodingmachine/safe": "^2.4"
+        "thecodingmachine/safe": "^2.5"
     },
     "require-dev": {
-        "doctrine/coding-standard": "^11.1",
+        "doctrine/coding-standard": "^12.0",
         "league/openapi-psr7-validator": "^0.21.0",
-        "nyholm/psr7": "^1.6",
-        "phpstan/phpstan": "^1.10.10",
-        "phpunit/phpunit": "^10.0.19",
+        "nyholm/psr7": "^1.7",
+        "phpstan/phpstan": "^1.10.14",
+        "phpunit/phpunit": "^10.1.2",
         "squizlabs/php_codesniffer": "^3.7.2",
-        "symfony/browser-kit": "5.4.*",
-        "symfony/psr-http-message-bridge": "^2.1",
+        "symfony/browser-kit": "6.2.*",
+        "symfony/psr-http-message-bridge": "^2.2",
         "vimeo/psalm": "^5.9"
     },
     "config": {
@@ -88,7 +88,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.*"
+            "require": "6.2.*"
         }
     }
 }

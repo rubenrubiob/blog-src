@@ -6,11 +6,11 @@ namespace rubenrubiob\Infrastructure\Ui\Http\Response\Serializer;
 
 use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
 use rubenrubiob\Infrastructure\Ui\Http\Response\Presenter\LlibreDTOPresenter;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 use function assert;
 
-final readonly class LlibreDTOJsonNormalizer implements ContextAwareNormalizerInterface
+final readonly class LlibreDTOJsonNormalizer implements NormalizerInterface
 {
     private const FORMAT = 'json';
 
@@ -20,10 +20,9 @@ final readonly class LlibreDTOJsonNormalizer implements ContextAwareNormalizerIn
     }
 
     /** @param array<array-key, mixed> $context */
-    public function supportsNormalization(mixed $data, string $format = null, array $context = [])
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
-        return $format === self::FORMAT
-            && $data instanceof LlibreDTO;
+        return $format === self::FORMAT && $data instanceof LlibreDTO;
     }
 
     /**
