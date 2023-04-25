@@ -20,7 +20,7 @@ final readonly class LlibreDTOJsonNormalizer implements ContextAwareNormalizerIn
     }
 
     /** @param array<array-key, mixed> $context */
-    public function supportsNormalization(mixed $data, string $format = null, array $context = [])
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $format === self::FORMAT
             && $data instanceof LlibreDTO;

@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace rubenrubiob\Infrastructure\Persistence\Dummy\Llibre;
 
 use rubenrubiob\Domain\DTO\Llibre\LlibreDTO;
+use rubenrubiob\Domain\Event\LlibreWasCreated;
 use rubenrubiob\Domain\Exception\Repository\Llibre\LlibreDTONotFound;
 use rubenrubiob\Domain\Repository\Llibre\FindLlibreDTOsRepository;
 use rubenrubiob\Domain\Repository\Llibre\GetLlibreDTOByLlibreIdRepository;
+use rubenrubiob\Domain\Service\Event\EventStore;
 use rubenrubiob\Domain\ValueObject\Llibre\AutorNom;
 use rubenrubiob\Domain\ValueObject\Llibre\LlibreId;
 use rubenrubiob\Domain\ValueObject\Llibre\LlibreTitol;
+use Safe\DateTimeImmutable;
 
 final readonly class DummyFindLlibreDTOsRepository implements FindLlibreDTOsRepository
 {
@@ -21,6 +24,13 @@ final readonly class DummyFindLlibreDTOsRepository implements FindLlibreDTOsRepo
     /** @inheritDoc */
     public function __invoke(): array
     {
+        EventStore::getInstance()->publish(
+            new LlibreWasCreated(
+                LlibreId::fromString('080343dc-cb7c-497a-ac4d-a3190c05e323'),
+                new DateTimeImmutable(),
+            )
+        );
+
         return [
             new LlibreDTO(
                 LlibreId::fromString('080343dc-cb7c-497a-ac4d-a3190c05e323'),

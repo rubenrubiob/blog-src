@@ -1,0 +1,41 @@
+deptrac:
+    analyser:
+      types:
+        - "class"
+        - "file"
+        - "function_call"
+    paths:
+        - ./src
+    layers:
+        # Layer definition
+        - name: EventStore
+          collectors:
+              - type: bool
+                must:
+                  - type: class
+                    value: rubenrubiob\\Domain\\Service\\Event\\EventStore
+                  - type: method
+                    value: publish
+        - name: AggregateRoots
+          collectors:
+              - type: directory
+                regex: src/Domain/Aggregate
+        - name: Other
+          collectors:
+            - type: bool
+              must:
+                - type: directory
+                  value: src
+              must_not:
+                - type: layer
+                  layer: AggregateRoots
+                - type: layer
+                  layer: EventStore
+    ruleset:
+        EventStore:
+          - Other
+        AggregateRoots:
+          - EventStore
+          - Other
+        Other:
+          - AggregateRoots
