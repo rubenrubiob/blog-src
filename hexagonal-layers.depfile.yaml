@@ -1,42 +1,40 @@
 parameters:
     paths:
         - ./src
-        - ./vendor
     layers:
         # Layer definition
         - name: Domain
           collectors:
               - type: directory
                 regex: src/Domain
+
         - name: Application
           collectors:
               - type: directory
                 regex: src/Application
+
         - name: Infrastructure
           collectors:
               - type: directory
                 regex: src/Infrastructure
-        # Common
+
+        # Vendor
+        - name: DomainVendor
+          collectors:
+              - type: className
+                regex: ^(Brick\\Math|Brick\\Money|Doctrine\\Common\\Collections|Ramsey\\Uuid)\\.*
+
         - name: Vendor
           collectors:
               - type: className
-                regex: ^(Symfony)\\.*, ^Symfony\\Component\\Uid\\.*
-
-        - name: DoctrineCollections
-          collectors:
-              - type: className
-                regex: ^Doctrine\\Common\\Collections\\.*
-
+                regex: ^(Symfony|CuyZ\\Valinor|League\\ConstructFinder|League\\Tactician)\\.*
 
     ruleset:
-        # Billing BC rules
         Domain:
-            - DoctrineCollections
+            - DomainVendor
         Application:
             - Domain
-            - DoctrineCollections
         Infrastructure:
             - Domain
             - Application
             - Vendor
-            - DoctrineCollections

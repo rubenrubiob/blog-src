@@ -34,7 +34,7 @@ infection: ## Execute infection
 quality: phpstan psalm infection
 
 architecture-hexagonal-layers:
-	@docker exec blog-src-php sh -c "deptrac analyse --config-file=hexagonal-layers.depfile.yaml --cache-file=.deptrac.hexagonal-layers.cache"
+	@docker exec blog-src-php sh -c "deptrac analyse --config-file=hexagonal-layers.depfile.yaml --cache-file=.deptrac.hexagonal-layers.cache --report-uncovered --fail-on-uncovered"
 
 symfony-lint-container:
 	@docker exec blog-src-php sh -c "bin/console lint:container"
